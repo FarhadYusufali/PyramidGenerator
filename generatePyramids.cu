@@ -61,16 +61,17 @@ __global__ void generatePyramid (float *pyramids, int i, int origImgWidth, int o
   __syncthreads();
     
   if( (ix<pyrmWidth) && (iy<pyrmHeight) ) {
-      int centerX = min(max(2*ix, 0), imgWidth);
-      int centerY = min(max(2*iy, 0), imgHeight);
-
-      int left = min(max(2*ix - 1, 0), imgWidth);
-      int down = min(max(2*iy - 1, 0), imgHeight);
-
-      int right = min(max(2*ix + 1, 0), imgWidth);
-      int up = min(max(2*iy + 1, 0), imgHeight);
-      
+   
       #ifdef DEBUG
+	 int centerX = min(max(2*ix, 0), imgWidth);
+         int centerY = min(max(2*iy, 0), imgHeight);
+
+         int left = min(max(2*ix - 1, 0), imgWidth);
+         int down = min(max(2*iy - 1, 0), imgHeight);
+
+         int right = min(max(2*ix + 1, 0), imgWidth);
+         int up = min(max(2*iy + 1, 0), imgHeight);
+	  
          printf("Index: (%d, %d)\n", ix, iy);
       	 printf("Center (%d, %d): %lf\n", centerX, centerY, pyramids[centerX + centerY*imgWidth + imgOffset]);
          printf("Center Left (%d, %d): %lf\n", left, centerY, pyramids[left + centerY*imgWidth + imgOffset]);
