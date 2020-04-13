@@ -61,7 +61,6 @@ __global__ void generatePyramid (float *pyramids, int i, int origImgWidth, int o
   __syncthreads();
     
   if( (ix<pyrmWidth) && (iy<pyrmHeight) ) {
-   
       #ifdef DEBUG
 	 int centerX = min(max(2*ix, 0), imgWidth);
          int centerY = min(max(2*iy, 0), imgHeight);
@@ -153,11 +152,9 @@ int main() {
    double timeStampC = getTimeStamp() ;
       
    cudaMemcpy (h_pyramids, d_pyramids, pyramidsSize*sizeof(float), cudaMemcpyDeviceToHost);
-
    double timeStampD = getTimeStamp();
    
    cudaError_t err = cudaPeekAtLastError();
-
    if (err != cudaSuccess) {
       printf("Error: %s", cudaGetErrorString(err));
       exit(-1);
